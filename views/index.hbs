@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/semantic.min.css">
+    <title>SQL Demo</title>
+</head>
+<body class="row g-3" style="margin: 1% 1% auto 1%;">
+    <fieldset>
+        <legend>Form</legend>
+        <form action="/" method="POST">
+            
+            <label class="ui label" for="Name">Name</label>
+            <div class="ui input">
+                <input type="text" name="name" id="name" placeholder="Enter name" required>
+            </div>
+
+            <label class="ui label" for="Email">Email</label>
+            <div class="ui input">
+                <input type="email" name="email" id="email" placeholder="Enter email" required>
+            </div>
+    
+            <label class="ui label" for="Password">Password</label>
+            <div class="ui input">
+                <input type="password" name="password" id="password" placeholder="Enter password" required>
+            </div>
+
+            <label class="ui label" for="confpassword">Confirm Password</label>
+            <div class="ui input">
+                <input type="password" name="confpassword" id="confpassword" placeholder="Enter confirm password" required>
+            </div><br><br>
+
+            <label class="ui label" for="hobby">Hobby</label>
+            <select name="hobby" id="hobby">
+                <option value="Cricket">Cricket</option>
+                <option value="Football">Football</option>
+                <option value="Coding">Coding</option>
+            </select><br><br>
+
+            <label class="ui label" for="dob">Date of Birth</label>
+            <div class="ui input">
+                <input type="date" name="dob" id="dob" required>
+            </div><br><br>
+
+            <div class="ui form">
+                <div class="inline fields">
+                    <label class="ui label">Gender</label>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="gender" value="M">
+                            <label>Male</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="gender" value="F">
+                            <label>Female</label>
+                        </div>
+                    </div>
+                </div>
+            </div><br>
+
+            <label class="ui label">Status</label>
+            <div class="ui checkbox">
+                <input type="checkbox" name="status" value="1">
+                <label>Active</label>
+            </div>
+
+            {{#if pass}}
+                <p>Password doesn't match</p>
+            {{/if}}
+
+            <div style="margin: auto auto auto 85%;">
+                <button class="ui button" type="reset">CLEAR</button>
+                <button class="ui button" type="submit">SAVE</button>
+            </div>
+        </form>
+    </fieldset>
+
+    <fieldset>
+        <legend>Result</legend>
+        <table class="ui celled table">
+            <thead>
+                <tr>
+                    <th>Index</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>D.O.B.</th>
+                    <th>Hobby</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            
+            {{#each result}}
+                <tr>
+                    <td>{{this.id}}</td>
+                    <td>{{this.name}}</td>
+                    <td>{{this.email}}</td>
+                    <td>{{this.gender}}</td>
+                    <td>{{this.dob}}</td>
+                    <td>{{this.hobby}}</td>
+                    <td>{{returnstatus this.activestatus}}</td>
+                    <td>
+                        <a href="/edit/{{this.id}}">Edit</a> |
+                        <a href="/delete/{{this.id}}">Delete</a>
+                    </td>
+                </tr>
+            {{else}}
+                <tr>
+                    <td rowspan="8">No Data found</td>
+                </tr>
+            {{/each}}
+        </table>
+    </fieldset>
+    
+</body>
+</html>
